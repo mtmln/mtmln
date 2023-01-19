@@ -19,7 +19,6 @@ with open('data.csv', newline='') as csvfile:
     current_prompt = []
     index = 0
 
-    progress_f = 0
     while True:
 # 4 -> zakres outputu
         if index >= (len(values) - 4):
@@ -40,18 +39,12 @@ with open('data.csv', newline='') as csvfile:
             data.append(input)
             current_prompt.clear()
             generated_text.clear()
-            print(index)
             mod += 1
             index = 0
             index += (mod - 1)
-            progress_f += 1
-            progress = (progress_f / 2500) * 100
-            print(str(progress) + "%")
         index += 1
 
-result = ' '.join(data)
-result = result.replace("} {", "}\n{")
-print(result)
+result = '\n'.join(data)
 
 file = open('result.txt', 'w')
 file.write(result)

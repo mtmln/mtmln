@@ -18,10 +18,12 @@ export default async function (req, res) {
   const animal = req.body.animal || '';
   var temp = parseFloat(req.body.temp) || 0.0;
   const limit = parseInt(req.body.limit) || 10; 
+  const cid = req.body.conversationId|| ''; 
+  const mid = req.body.modelId || 'text-davinci-003'; 
   if (animal.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Podaj prompt",
       }
     });
     return;
@@ -31,7 +33,7 @@ export default async function (req, res) {
 
   try {
     const completion = await openai.createCompletion({
-      model: "text-davinci-003",
+	    model: mid,
       prompt: generatePrompt(animal),
       max_tokens: limit,
       temperature: temp,
@@ -39,6 +41,8 @@ export default async function (req, res) {
     //for(var text in completion.data.choices){
     console.log("temp: " + temp)
     console.log("limit: " + limit)
+    console.log("mid: " + mid)
+    console.log("cid: " + cid)
 
 
     //console.log(completion.data.choices);

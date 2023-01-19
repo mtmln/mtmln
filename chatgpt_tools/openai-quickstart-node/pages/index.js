@@ -7,6 +7,8 @@ export default function Home() {
   const [limitInput, setLimit] = useState("");
   const [tempInput, setTemp] = useState("");
   const [result, setResult] = useState();
+  const [conversationIdInput, setConversationId] = useState("");
+  const [modelIdInput, setModelId] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -16,9 +18,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-	      body: JSON.stringify({ animal: animalInput, limit: limitInput, temp: tempInput }),
-        //body += JSON.stringify({ limit: limitInput}),
-       // body: JSON.stringify({ temp: tempInput}),
+	      body: JSON.stringify({ animal: animalInput, limit: limitInput, temp: tempInput, modelId: modelIdInput, conversationId: conversationIdInput }),
       });
 
       const data = await response.json();
@@ -68,7 +68,15 @@ export default function Home() {
             onChange={(e) => setLimit(e.target.value)}
           />
 
-          <input type="submit" value="Generate" />
+	     <input
+            type="text"
+            name="model_id"
+	    placeholder="Model ID"
+            value={modelIdInput}
+            onChange={(e) => setModelId(e.target.value)}
+          />
+
+	  <input type="submit" value="Generate" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>

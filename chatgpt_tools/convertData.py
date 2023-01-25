@@ -1,5 +1,4 @@
 import csv
-import json
 
 # data.csv -> nazwa pliku
 with open('data.csv', newline='') as csvfile:
